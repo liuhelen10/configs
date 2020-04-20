@@ -1,7 +1,14 @@
+" install vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#begin()
+call plug#begin('~/.vim/plugged')
 
 " theming
 Plug 'joshdick/onedark.vim'
@@ -10,44 +17,47 @@ Plug 'vim-airline/vim-airline'
 " code navigation
 Plug 'junegunn/fzf',                 { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Plug 'justinmk/vim-sneak'
-" Plug 'ludovicchabant/vim-gutentags'
-" Plug 'majutsushi/tagbar'
+Plug 'justinmk/vim-sneak'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree',          { 'on':  'NERDTreeToggle' }
 
 " editor ui
-" Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-signify'
 Plug 'Shougo/deoplete.nvim',         { 'do': ':UpdateRemotePlugins' }
 " Plug 'w0rp/ale'
 
 " vim enhancements
-" Plug 'qpkorr/vim-bufkill'
+Plug 'qpkorr/vim-bufkill'
 Plug 'tpope/vim-commentary'
 " Plug 'tpope/vim-fugitive'
-" Plug 'tpope/vim-repeat'
-" Plug 'tpope/vim-rhubarb'
-" Plug 'tpope/vim-surround'
-" Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 
 " editing enhancements
-" Plug 'AndrewRadev/splitjoin.vim'
-" Plug 'itchyny/vim-cursorword'
-" Plug 'junegunn/vim-easy-align'
-" Plug 'ntpeters/vim-better-whitespace'
-" Plug 'peterrincker/vim-argumentative'
-" Plug 'raimondi/delimitMate'
-" Plug 'wellle/targets.vim'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'itchyny/vim-cursorword'
+Plug 'junegunn/vim-easy-align'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'peterrincker/vim-argumentative'
+Plug 'raimondi/delimitMate'
+Plug 'wellle/targets.vim'
 
-" language specific/syntax
-" Plug 'zchee/deoplete-go',            { 'do': 'make' }
-" Plug 'fatih/vim-go',                 { 'for': 'go' }
+" language specific
+Plug 'zchee/deoplete-go',            { 'do': 'make' }
+Plug 'fatih/vim-go',                 { 'for': 'go' }
+" Plug 'davidhalter/jedi-vim',         { 'for': 'python' }
+" Plug 'fisadev/vim-isort',            { 'for': 'python' }
+" Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
+" Plug 'zchee/deoplete-jedi',          { 'for': 'python' }
 Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'leafgarland/typescript-vim'
-Plug 'mileszs/ack.vim'
+Plug 'hdima/python-syntax'
+Plug 'rking/ag.vim'
 
 call plug#end()
 
@@ -70,10 +80,11 @@ set clipboard^=unnamed,unnamedplus
 set cursorline
 set visualbell
 set mouse=a
+set inccommand=nosplit
 
 set nowrap
 set number
-set relativenumber
+" set relativenumber
 set splitbelow
 set splitright
 
@@ -101,6 +112,7 @@ let g:strip_whitespace_on_save = 1
 " deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
+" let g:python3_host_prog = '/Library/Frameworks/Python.framework/Versions/3.7/bin/python3'
 
 " sneak
 " let g:sneak#label = 1
@@ -117,6 +129,8 @@ let g:plug_window = 'enew'
 nnoremap Y y$
 nnoremap B ^
 nnoremap E $
+
+tnoremap <Esc> <C-\><C-n>
 
 " Clear previous highlighted search terms by pressing esc
 nnoremap <esc> :noh<return><esc>
@@ -144,6 +158,11 @@ nmap ga <Plug>(EasyAlign)
 " fzf
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <C-p> :GFiles<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ag
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+ca Ag Ag!
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tagbar
