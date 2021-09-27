@@ -1,0 +1,11 @@
+[alias]
+	co = checkout
+	cm = commit
+  b = branch
+[user]
+	name = Helen Liu
+	email = liuhelen10@gmail.com
+[core]
+	editor = vim
+[push]
+	default = current
