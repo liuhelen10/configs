@@ -1,9 +1,12 @@
-
 # Git branch display
-parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+function parse_git_branch() {
+    git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1]/p'
 }
-export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
+
+setopt PROMPT_SUBST
+export PROMPT='%F{grey}%n%f %F{cyan}%~%f %F{green}$(parse_git_branch)%f %F{normal}$%f '
+
+export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
 
 # Git
 alias gst='git status'
@@ -15,23 +18,18 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
 # Bash profile related
 alias source_profile='source ~/.bash_profile'
 alias profile='nv ~/.bash_profile'
 alias nv='nvim'
-alias rsync='~/Work/hacktools/sync-to-onebox-v3.sh'
+
+# Sora
+alias ssh_staging='ssh -i ~/work/honu_ssh_key_02Jan2019.pem ec2-user@10.0.8.30'
+alias pg_dump_prod="pg_dump -d honu -h https://honu-production-postgres.ciy7cagrg9hd.us-west-1.rds.amazonaws.com/?pdxwnoemwrhovkkiufivchri4u=g5ss4akkgreizicsrbgsb5k26i -p 5432 -U honu -W -F t > honubackup.tar"
 
 # NVM
-export NVM_DIR="$HOME/.nvm"
-  . "/usr/local/opt/nvm/nvm.sh"
-  . "/usr/local/opt/nvm/nvm.sh"
-
-# pyenv
-export PATH="/usr/local/bin:/Users/helenliu/.pyenv/bin:$PATH"
-source '/Users/helenliu/Work/awsaccess/awsaccess2.sh' # awsaccess
-export PS1="\$(ps1_mfa_context)$PS1" # awsaccess
-
-# Setting PATH for Python 3.7
-# The original version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
-export PATH
+# export NVM_DIR="$HOME/.nvm"
+#  . "/usr/local/opt/nvm/nvm.sh"
+#  . "/usr/local/opt/nvm/nvm.sh"
