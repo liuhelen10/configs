@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/helenliu/.oh-my-zsh"
+export ZSH="/Users/helen/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -116,6 +116,12 @@ alias gn='ps aux | grep node'
 
 # Sora
 alias pg_dump_prod='pg_dump -d honu -h https://honu-production-postgres.ciy7cagrg9hd.us-west-1.rds.amazonaws.com/?3uatwjncdvfchavktiywcmp46i=g5ss4akkgreizicsrbgsb5k26ihonu-production-postgres.ciy7cagrg9hd.us-west-1.rds.amazonaws.com -p 5432 -U honu -W -F t > ~/honu-prod-backup.tar'
+alias sora_start_servers='docker-compose -f docker-compose.yml -f docker-optional-app.yaml up'
+alias sora_start_client='docker exec -it -w /app/client sora-sora_app-1 npm run start'
+alias sora_start_workers='npm run dev-workers'
+alias sora_run='docker exec -it -w /app/client sora-sora_app-1'
+
+
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
