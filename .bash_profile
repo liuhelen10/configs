@@ -8,6 +8,9 @@ export PROMPT='%F{grey}%n%f %F{cyan}%~%f %F{green}$(parse_git_branch)%f %F{norma
 
 export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
 
+# Postgres
+export PGDATA="/usr/local/var/postgres"
+
 # Git
 alias gst='git status'
 alias gcl='git checkout master && git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
