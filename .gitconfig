@@ -1,7 +1,9 @@
 [alias]
 	co = checkout
 	cm = commit
-  b = branch
+    b = branch
+    list-merged = branch -vv | awk '/: gone]/ {print $1}' | grep -v "main$"
+    delete-merged = git branch -vv | awk '/: gone]/ {print $1}' | grep -v "main$" | xargs git branch -D
 [user]
 	name = Helen Liu
 	email = liuhelen10@gmail.com
